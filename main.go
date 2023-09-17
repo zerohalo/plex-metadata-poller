@@ -8,9 +8,11 @@ import (
 )
 
 var (
-	plexToken    = os.Getenv("PLEX_TOKEN")
-	plexServer   = os.Getenv("PLEX_SERVER")
-	pollInterval = 5 * time.Second
+	plexToken      = os.Getenv("PLEX_TOKEN")
+	plexServer     = os.Getenv("PLEX_SERVER")
+	plexUserID     = os.Getenv("PLEX_USER_ID")
+	plexClientName = os.Getenv("PLEX_CLIENT_NAME")
+	pollInterval   = 5 * time.Second
 )
 
 func main() {
@@ -26,13 +28,13 @@ func main() {
 	client := goplexapi.NewPlexClient(plexUrl, plexToken)
 	var previousTrackInfo *goplexapi.TrackInfo
 	for {
-		trackInfo, err := client.GetCurrentPlayingSong("Plexamp")
+		trackInfo, err := client.GetCurrentPlayingSong(plexClientName, plexUserID)
 		if err != nil {
 			fmt.Println("Error:", err)
 			return
 		}
 		if previousTrackInfo == nil || trackInfo.Title != previousTrackInfo.Title {
-			fmt.Printf("Currently Playing Song: %s by: %s from Album: %s\n", trackInfo.Title, trackInfo.Artist, trackInfo.Album)
+			fmt.Printf("Currently Playing Song: %s Artist: %s Album: %s\n", trackInfo.Title, trackInfo.Artist, trackInfo.Album)
 			//art, err := client.GetAlbumArt(trackInfo.Thumb)
 			//if err != nil {
 			//	fmt.Println("Error:", err)
