@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/base64"
 	"fmt"
 	"github.com/zerohalo/goplexapi"
 	"os"
@@ -31,14 +30,15 @@ func main() {
 			fmt.Println("Error:", err)
 			return
 		}
+
 		fmt.Printf("Currently Playing Song: %s by: %s from Album: %s\n", trackInfo.Title, trackInfo.Artist, trackInfo.Album)
-		art, err := client.GetAlbumArt(trackInfo.Thumb)
-		if err != nil {
-			fmt.Println("Error:", err)
-			return
-		}
-		b64art := base64.StdEncoding.EncodeToString(art)
-		trackInfo.Thumb = b64art
+		//art, err := client.GetAlbumArt(trackInfo.Thumb)
+		//if err != nil {
+		//	fmt.Println("Error:", err)
+		//	return
+		//}
+		//b64art := base64.StdEncoding.EncodeToString(art)
+		//trackInfo.Thumb = b64art
 		//mimeType := http.DetectContentType(art)
 
 		writeFile(trackInfo)
@@ -60,7 +60,10 @@ func writeFile(trackInfo *goplexapi.TrackInfo) {
 		}
 	}()
 
-	_, err = fh.WriteString(fmt.Sprintf("Title: %s\nArtist: %s\nAlbum: %s\nArtworkData: %s\n", trackInfo.Title, trackInfo.Artist, trackInfo.Album, trackInfo.Thumb))
+	// ArtworkData not currently supported by Icecast, but may be in the future
+	//_, err = fh.WriteString(fmt.Sprintf("Title: %s\nArtist: %s\nAlbum: %s\nArtworkData: %s\n", trackInfo.Title, trackInfo.Artist, trackInfo.Album, trackInfo.Thumb))
+	_, err = fh.WriteString(fmt.Sprintf("Title: %s\nArtist: %s\nAlbum: %s\n", trackInfo.Title, trackInfo.Artist, trackInfo.Album))
+
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
