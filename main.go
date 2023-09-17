@@ -10,7 +10,7 @@ import (
 var (
 	plexToken      = os.Getenv("PLEX_TOKEN")
 	plexServer     = os.Getenv("PLEX_SERVER")
-	plexUserID     = os.Getenv("PLEX_USER_ID")
+	plexUserName   = os.Getenv("PLEX_USER_NAME")
 	plexClientName = os.Getenv("PLEX_CLIENT_NAME")
 	pollInterval   = 5 * time.Second
 )
@@ -28,7 +28,7 @@ func main() {
 	client := goplexapi.NewPlexClient(plexUrl, plexToken)
 	var previousTrackInfo *goplexapi.TrackInfo
 	for {
-		trackInfo, err := client.GetCurrentPlayingSong(plexClientName, plexUserID)
+		trackInfo, err := client.GetCurrentPlayingSong(plexClientName, plexUserName)
 		if err != nil {
 			fmt.Println("Error:", err)
 			return

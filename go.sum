@@ -1,2 +1,6 @@
 github.com/zerohalo/goplexapi v0.0.0-20230917175417-89a105528552 h1:NtoEUobOOm8p/5ULmXw/NjJW9PQYNh8mXUjVD+FRkYc=
 github.com/zerohalo/goplexapi v0.0.0-20230917175417-89a105528552/go.mod h1:i6Vi/ORsKkjXm6Ajk4Y3vZJnKb+mCdSBmw1Ff/9idoM=
+github.com/zerohalo/goplexapi v0.0.0-20230917183411-c45370ef6fc1 h1:2luYgn3kIk8TLDBUkmQPdiNZ5kuHTYWM82X3Df0Bqd8=
+github.com/zerohalo/goplexapi v0.0.0-20230917183411-c45370ef6fc1/go.mod h1:i6Vi/ORsKkjXm6Ajk4Y3vZJnKb+mCdSBmw1Ff/9idoM=
+github.com/zerohalo/goplexapi v0.0.0-20230917183628-f76001555efe h1:CpI8a7/AWO1tBaZQXO51mx08nRg6EmxWcuvEcG0oQ4o=
+github.com/zerohalo/goplexapi v0.0.0-20230917183628-f76001555efe/go.mod h1:i6Vi/ORsKkjXm6Ajk4Y3vZJnKb+mCdSBmw1Ff/9idoM=
