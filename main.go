@@ -24,24 +24,27 @@ func main() {
 	}
 	plexUrl := fmt.Sprintf("https://%s", plexServer)
 	client := goplexapi.NewPlexClient(plexUrl, plexToken)
+	var previousTrackInfo *goplexapi.TrackInfo
 	for {
 		trackInfo, err := client.GetCurrentPlayingSong("Plexamp")
 		if err != nil {
 			fmt.Println("Error:", err)
 			return
 		}
+		if previousTrackInfo == nil || trackInfo.Title != previousTrackInfo.Title {
+			fmt.Printf("Currently Playing Song: %s by: %s from Album: %s\n", trackInfo.Title, trackInfo.Artist, trackInfo.Album)
+			//art, err := client.GetAlbumArt(trackInfo.Thumb)
+			//if err != nil {
+			//	fmt.Println("Error:", err)
+			//	return
+			//}
+			//b64art := base64.StdEncoding.EncodeToString(art)
+			//trackInfo.Thumb = b64art
+			//mimeType := http.DetectContentType(art)
 
-		fmt.Printf("Currently Playing Song: %s by: %s from Album: %s\n", trackInfo.Title, trackInfo.Artist, trackInfo.Album)
-		//art, err := client.GetAlbumArt(trackInfo.Thumb)
-		//if err != nil {
-		//	fmt.Println("Error:", err)
-		//	return
-		//}
-		//b64art := base64.StdEncoding.EncodeToString(art)
-		//trackInfo.Thumb = b64art
-		//mimeType := http.DetectContentType(art)
-
-		writeFile(trackInfo)
+			writeFile(trackInfo)
+			previousTrackInfo = trackInfo
+		}
 		time.Sleep(pollInterval)
 	}
 }
