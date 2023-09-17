@@ -65,5 +65,4 @@ func writeFile(trackInfo *goplexapi.TrackInfo) {
 		fmt.Println("Error:", err)
 		return
 	}
-	time.Sleep(time.Duration(pollInterval) * time.Second)
 }
